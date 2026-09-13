@@ -1,30 +1,40 @@
 #include <stdio.h>
-#include <math.h>
 
-
-int KgToPounds(float converterValue)
+void ScreenCleaner()
 {
+    printf("\033[H\033[J");
+}
+
+void KgToPounds(float converterValue)
+{
+    ScreenCleaner();
     float weight;
 
     printf("Enter the weight in kilograms: ");
-    scanf("%f", &weight);
+    if ((scanf("%f", &weight)) != 1 || weight < 0)
+    {
+        printf("Invalid value!\n");
+        return;
+    }
 
     printf("%.2f kilograms is equal to %.2f pounds\n", weight, weight * converterValue);
 
-    return 0;
 }
 
-int PoundsToKg(float converterValue)
+void PoundsToKg(float converterValue)
 {
+    ScreenCleaner();
     float weight;
 
     printf("Enter the weight in pounds: ");
-    scanf("%f", &weight);
+    if ((scanf("%f", &weight)) != 1 || weight < 0)
+    {
+        printf("Invalid value!\n");
+        return;
+    }
 
     printf("%.2f pounds is equal to %.2f kilograms\n", weight, weight / converterValue);
 
-
-    return 0;
 }
 
 int main()
@@ -35,14 +45,31 @@ int main()
     printf("Weight conversion program.\n");
     printf("1. Kilograms to Pounds\n2.Pounds to Kilograms\n");
     printf("Enter your choice (1 or 2): ");
-    scanf("%d", &choice);
 
-    if (choice == 1)
+    if ((scanf("%d", &choice)) != 1 || choice < 1 || choice > 2)
     {
-        KgToPounds(converterValue);
-    } else
-    {
-        PoundsToKg(converterValue);
+        printf("Invalid value!\n");
+        return 1;
+    }
+
+    // if (choice == 1)
+    // {
+    //     KgToPounds(converterValue);
+    // } else
+    // {
+    //     PoundsToKg(converterValue);
+    // }
+
+    switch (choice){
+        case 1:
+            KgToPounds(converterValue);
+            break;
+            
+        case 2:
+            PoundsToKg(converterValue);
+            break;
+        default:
+            break;
     }
 
     return 0;
