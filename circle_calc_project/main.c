@@ -4,7 +4,7 @@
 void puffer_cleaner()
 {
     int c;
-    while((c = getchar()) != '\n' && c != '\0');
+    while((c = getchar()) != '\n' && c != EOF);
 }
 
 int main()
