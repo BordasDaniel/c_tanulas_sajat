@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void ScreenCleaner()
+void ScreenCleaner(void)
 {
     printf("\033[H\033[J");
 }
