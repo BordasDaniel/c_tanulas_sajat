@@ -19,7 +19,8 @@ int main()
     int min = 50;
     int max = 100;
 
-    int randomnum1 = (rand() % (max - min + 1) + min);
+    printf("%d\n", (rand() % (max - min + 1)));
+    int randomnum1 = (rand() % (max - min + 1)) + min;
     printf("%d\n", randomnum1);
 
     return 0;
