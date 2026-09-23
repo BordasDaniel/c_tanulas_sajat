@@ -16,6 +16,8 @@ int main()
 
     fprintf(pFile, "%s", text);
 
+    fclose(pFile);
+
     printf("File was written succesfully!\n");
 
 
