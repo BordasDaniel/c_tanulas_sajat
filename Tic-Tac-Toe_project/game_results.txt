@@ -1,0 +1,35 @@
+Game played on: 01-01-1970 01:00:00
+Game result: Player X wins
+X O O 
+X O . 
+X X O 
+
+----------------------------------------
+Game played on: 24-09-2026 22:59:48
+Game result: Player X wins
+X O O 
+. X O 
+. . X 
+
+----------------------------------------
+Game played on: 24-09-2026 23:00:45
+Game result: Player O wins
+O X X 
+X O O 
+. X O 
+
+----------------------------------------
+Game played on: 24-09-2026 23:01:35
+Game result: Player X wins
+X O X 
+O O X 
+O X X 
+
+----------------------------------------
+Game played on: 24-09-2026 23:02:21
+Game result: It's a tie
+X X O 
+O O X 
+X O O 
+
+----------------------------------------

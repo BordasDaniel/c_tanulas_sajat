@@ -19,9 +19,36 @@ void BufferClearer(void)
     while((c = getchar()) != '\n' && c != EOF);
 }
 
-void GameFileWriter(void)
+
+// Writes the latest game to a txt file with date
+void GameFileWriter(PlayerSymbol pMatrix[3][3], PlayerSymbol winner)
 {
-    // pass
+    FILE* file = fopen("game_results.txt", "a");
+    time_t rawtime = 0;
+    struct tm* pTime = NULL;
+    time(&rawtime);
+    pTime = localtime(&rawtime);
+    
+
+    if(file == NULL)
+    {
+        printf("Error opening file!\n");
+        return; // Exit the function if the file cannot be opened
+    }
+    fprintf(file, "Game played on: %02d-%02d-%04d %02d:%02d:%02d\n", pTime->tm_mday, pTime->tm_mon + 1, pTime->tm_year + 1900, pTime->tm_hour, pTime->tm_min, pTime->tm_sec);
+    fprintf(file, "Game result: %s\n", winner == X ? "Player X wins" : winner == O ? "Player O wins" : "It's a tie");
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            fprintf(file, "%c ", pMatrix[i][j] == X ? 'X' : pMatrix[i][j] == O ? 'O' : '.');
+        }
+        fprintf(file, "\n");
+    }
+    fprintf(file, "\n----------------------------------------\n");
+    fclose(file);
+
+    printf("\nGame result saved to game_results.txt\n");
 }
 
 
@@ -125,6 +152,8 @@ PlayerSymbol FirstPlayerDecider(void)
 void GameLogic(PlayerSymbol pMatrix[3][3], PlayerSymbol nextPlayer)
 {
     bool isGameOver = false;
+    PlayerSymbol winner = EMPTY;
+    bool isItFull = false;
 
     while(!isGameOver)
     {
@@ -132,8 +161,8 @@ void GameLogic(PlayerSymbol pMatrix[3][3], PlayerSymbol nextPlayer)
         MatrixPrinter(pMatrix);
         PlayerTurn(pMatrix, nextPlayer);
         
-        PlayerSymbol winner = WinnerDecider(pMatrix);
-        bool isItFull = IsMatrixFull(pMatrix);
+        winner = WinnerDecider(pMatrix);
+        isItFull = IsMatrixFull(pMatrix);
 
         if(winner != EMPTY)
         {
@@ -154,6 +183,7 @@ void GameLogic(PlayerSymbol pMatrix[3][3], PlayerSymbol nextPlayer)
             nextPlayer = (nextPlayer == X) ? O : X;
         }
     }
+    GameFileWriter(pMatrix, winner);
 }
 
 void Game(void)
